@@ -1,0 +1,284 @@
+/* =========================
+   HEADER
+========================= */
+
+.tripzo-header {
+  z-index: 1000;
+  padding: 20px 0;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.tripzo-nav {
+
+  min-height: 72px;
+
+  padding: 0 25px;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  border: 1px solid rgba(0, 0, 0, 0.06);
+
+  border-radius: 100px;
+
+  backdrop-filter: blur(15px);
+
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.06);
+
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.tripzo-logo {
+
+  font-family: var(--heading-font);
+
+  font-size: 28px;
+
+  letter-spacing: -1px;
+
+  color: var(--dark-color);
+
+  text-decoration: none;
+
+  margin: 0;
+
+}
+
+
+/* =========================
+   MENU
+========================= */
+
+.tripzo-menu .nav-link {
+
+  position: relative;
+
+  padding: 10px 0 !important;
+
+  color: #444;
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  transition:
+    color 0.3s ease;
+
+}
+
+
+/* underline */
+
+.tripzo-menu .nav-link::after {
+
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+
+  bottom: 3px;
+
+  width: 0;
+
+  height: 2px;
+
+  background: var(--secondary-color);
+
+  transition:
+    width 0.3s ease;
+
+}
+
+
+.tripzo-menu .nav-link:hover {
+
+  color: var(--primary-color);
+
+}
+
+
+.tripzo-menu .nav-link:hover::after {
+
+  width: 100%;
+
+}
+
+
+/* =========================
+   HEADER BUTTON
+========================= */
+
+.tripzo-header-btn {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 12px 20px;
+
+  border-radius: 50px;
+
+  background: var(--primary-color);
+
+  color: white;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+
+}
+
+
+.tripzo-header-btn span {
+
+  transition:
+    transform 0.3s ease;
+
+}
+
+
+.tripzo-header-btn:hover {
+
+  background: var(--secondary-color);
+
+  color: var(--dark-color);
+
+}
+
+
+.tripzo-header-btn:hover span {
+
+  transform:
+    translate(3px, -3px);
+
+}
+
+
+/* =========================
+   MOBILE BUTTON
+========================= */
+
+.tripzo-toggler {
+
+  width: 45px;
+
+  height: 45px;
+
+  padding: 0;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: var(--primary-color);
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 5px;
+
+}
+
+
+.tripzo-toggler:focus {
+
+  box-shadow: none;
+
+}
+
+
+.tripzo-toggler span {
+
+  width: 18px;
+
+  height: 2px;
+
+  background: white;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 991px) {
+
+  .tripzo-header {
+
+    padding: 12px 0;
+
+  }
+
+
+  .tripzo-nav {
+
+    padding: 0 18px;
+
+    border-radius: 25px;
+
+  }
+
+
+  .tripzo-menu {
+
+    padding: 20px 0;
+
+    gap: 5px !important;
+
+  }
+
+
+  .tripzo-menu .nav-link {
+
+    padding: 8px 0 !important;
+
+  }
+
+
+  .tripzo-header-btn {
+
+    margin-bottom: 20px;
+
+  }
+
+}
+
+
+@media (max-width: 576px) {
+
+  .tripzo-nav {
+
+    min-height: 62px;
+
+  }
+
+  .tripzo-logo {
+
+    font-size: 24px;
+
+  }
+
+}

@@ -1,0 +1,130 @@
+.gl1,
+.gl2,
+.gl3,
+.gl4,
+.gl5,
+.gl6 {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+/* Desktop */
+.gl1 {
+    height: 100%;
+    min-height: 820px;
+}
+
+.gl2 {
+    height: 300px;
+}
+
+.gl3 {
+    height: 300px;
+}
+
+.gl4 {
+    height: 300px;
+}
+
+.gl5 {
+    height: 300px;
+}
+
+.gl6 {
+    height: 500px;
+}
+
+
+/* Tablet */
+@media (max-width: 991.98px) {
+
+    .gl1 {
+        height: 600px;
+    }
+
+    .gl2,
+    .gl3,
+    .gl4,
+    .gl5,
+    .gl6 {
+        height: 350px;
+    }
+}
+
+
+/* Mobile */
+@media (max-width: 767.98px) {
+
+    .section-padding {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .gl1 {
+        height: 450px;
+    }
+
+    .gl2,
+    .gl3,
+    .gl4,
+    .gl5,
+    .gl6 {
+        height: 300px;
+    }
+}
+
+
+/* Small Mobile */
+@media (max-width: 575.98px) {
+
+    .gl1 {
+        height: 350px;
+    }
+
+    .gl2,
+    .gl3,
+    .gl4,
+    .gl5,
+    .gl6 {
+        height: 250px;
+    }
+}
+
+/* ----About css---- */
+.about{
+    margin-bottom: 7vw;
+}
+.left-text h2{
+    font-size: 5rem;
+}
+.right-text h2{
+    font-size: 2rem;
+}
+.right-text ul li {
+    border: 2px solid #111111;
+    padding: 10px 14px;
+    margin: 10px 0px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    -webkit-backdrop-filter: blur(10px);
+    color: #e6b566;
+    background-color: #111111;
+   
+        transition: all 0.3s ease;
+}
+.right-text ul li:hover {
+    background: rgba(0, 0, 0, 0.726);
+    border-color: rgba(230, 181, 102, 0.6);
+    transform: translateX(5px);
+    box-shadow: 0 8px 25px rgba(230, 181, 102, 0.15);
+}
+@media (max-width: 767.98px) {
+    .left-text h2{
+    font-size: 3rem;
+}
+.right-text h2{
+    font-size: 2.5rem;
+}
+}
