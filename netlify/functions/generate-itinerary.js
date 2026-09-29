@@ -1,5 +1,3 @@
-// api/generate-itinerary.js
-//
 //  SERVERLESS FUNCTION:
 //   https://tumhari-site.vercel.app/api/generate-itinerary
 // Jab koi request aati hai, Vercel isko "spin up" karta hai, kaam karta hai,
