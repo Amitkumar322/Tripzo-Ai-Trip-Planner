@@ -1,11 +1,10 @@
-import './Style/skeleton.css'
+import './Style/Skeleton.css'
 export const SkeletonLoader = () => {
   return (
     <div className="website-skeleton">
 
       {/* Header */}
       <div className="skeleton skeleton-header"></div>
-
       {/* Hero */}
       <div className="skeleton skeleton-hero"></div>
 
