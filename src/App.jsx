@@ -3,8 +3,8 @@ import { useLocation } from "react-router-dom";
 
 import "./App.css";
 
-import { Header } from "./common/Header";
-import { Footer } from "./common/Footer";
+import { Header } from "./Common/Header";
+import { Footer } from "./Common/Footer";
 import { AppRoute } from "./Routes/AppRoute";
 import { SkeletonLoader } from "./Common/SkeletonLoader";
 
