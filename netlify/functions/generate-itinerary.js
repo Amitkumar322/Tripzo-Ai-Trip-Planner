@@ -1,23 +1,30 @@
-//  SERVERLESS FUNCTION:
-//   https://tumhari-site.vercel.app/api/generate-itinerary
-// Jab koi request aati hai, Vercel isko "spin up" karta hai, kaam karta hai,
-// response deta hai, aur wapas band ho jaata hai. Tumhe server manage
-// nahi karna padta.
+const json = (body, status = 200) =>
+  new Response(JSON.stringify(body), {
+    status,
+    headers: { "Content-Type": "application/json" },
+  });
 
-export default async function handler(req, res) {
+export default async (req) => {
   // Sirf POST request allow karo (form data POST se aayega)
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+    return json({ error: "Method not allowed" }, 405);
   }
 
-  const { destination, travelDates, travellers, tourType, budget, requirements } = req.body;
+  let body;
+  try {
+    body = await req.json();
+  } catch {
+    return json({ error: "Invalid request body" }, 400);
+  }
+
+  const { destination, travelDates, travellers, tourType, budget, requirements } = body;
 
   // Basic validation
   if (!destination || !travellers) {
-    return res.status(400).json({ error: "Destination and travellers are required" });
+    return json({ error: "Destination and travellers are required" }, 400);
   }
 
-  // GROUNDING: Tumhara real tours data, isi ko AI ko bhejenge
+  //GROUNDING: Tumhara real tours data, isi ko AI ko bhejenge
   // taaki AI koi fake tour na banaye, sirf inhi mein se suggest kare.
   const toursData = [
     { id: 1, category: "Adventure", destination: "Manali, Himachal Pradesh", duration: "5 Days / 4 Nights", price: "₹18,999", description: "Trek through snow-capped peaks and raft the roaring Beas river.", inclusions: ["Hotel Stay", "River Rafting", "Trekking Guide", "Breakfast & Dinner"] },
@@ -31,7 +38,7 @@ export default async function handler(req, res) {
   // PROMPT ENGINEERING:
   // Yahan hum AI ko exact instructions dete hain — kya data use karna hai,
   // kis format mein jawab dena hai. "Sirf JSON do, kuch aur text mat likho"
-  // — ye line bhot important hai warna AI extra explanation bhi jod deta hai
+  // — ye line bahut important hai warna AI extra explanation bhi jod deta hai
   // jisse JSON.parse() fail ho jaata hai.
   const prompt = `
 You are a travel planner for an Indian travel company called Tripzo.
@@ -72,7 +79,7 @@ Respond with ONLY valid JSON, no markdown, no extra text, in exactly this shape:
 
   // MODEL FALLBACK LIST: Free tier mein kayi models available hain.
   // Hum inhe order mein try karenge — jo bhi busy (503) ya unavailable (404/429) na ho,
-  // usi se response le lenge. Naya sabse pehle, phir purane, taaki best available mile.
+  // usी se response le lenge. Naya sabse pehle, phir purane, taaki best available mile.
   const MODELS_TO_TRY = [
     "gemini-3.8-flash",
     "gemini-3.1-flash-lite",
@@ -121,7 +128,7 @@ Respond with ONLY valid JSON, no markdown, no extra text, in exactly this shape:
 
       if (!result?.failed) {
         console.log(`Success with model: ${modelName}`);
-        return result; // ye model kaam kar gaya
+        return result; 
       }
 
       lastError = result.error;
@@ -151,7 +158,7 @@ Respond with ONLY valid JSON, no markdown, no extra text, in exactly this shape:
       aiResult = JSON.parse(cleanedText);
     } catch (parseErr) {
       console.error("Failed to parse AI JSON:", rawText);
-      return res.status(500).json({ error: "AI returned an invalid format, please try again" });
+      return json({ error: "AI returned an invalid format, please try again" }, 500);
     }
 
     // Matched tour IDs ko full tour objects se jod dete hain,
@@ -160,12 +167,12 @@ Respond with ONLY valid JSON, no markdown, no extra text, in exactly this shape:
       aiResult.matchedTours?.includes(t.id)
     );
 
-    return res.status(200).json({
+    return json({
       ...aiResult,
       matchedTours: matchedTourObjects,
     });
   } catch (err) {
     console.error("Server error:", err);
-    return res.status(500).json({ error: err.message || "Something went wrong" });
+    return json({ error: err.message || "Something went wrong" }, 500);
   }
-}
+};
